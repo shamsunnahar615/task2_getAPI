@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize:const Size(430,883),
       child: GetMaterialApp(
+        darkTheme:ThemeData.dark(),
+        theme: ThemeData.light(),
         themeMode:ThemeMode.system,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.fadeIn,

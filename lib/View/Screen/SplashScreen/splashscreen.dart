@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return GetBuilder<SplashScreenController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.grey,
           body:Center(
             child:Container(
               height:192.h,

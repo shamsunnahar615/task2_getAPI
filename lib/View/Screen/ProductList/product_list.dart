@@ -24,20 +24,25 @@ class _ProductListState extends State<ProductList> {
     return GetBuilder<ProductListController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: Colors.black12,
+         // backgroundColor: Colors.black12,
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.grey,
             title: Text(
               'All Product List',
               style: TextStyle(
                 fontSize: 25.sp,
                 fontWeight: FontWeight.w700,
-                color: Color(0xffFFFFFF),
+                color: Color(0xff000000),
               ),
             ),
+            //===================================this is Exempul theme icon =============================
             actions: [
-              IconButton(onPressed:(){}, icon:Icon(Icons.notifications_active,color:Color(0xffFFFFFF),))
+              IconButton(onPressed:(){
+                Get.isDarkMode
+                    ? Get.changeThemeMode(ThemeMode.light)
+                    : Get.changeThemeMode(ThemeMode.dark);
+              }, icon:Icon(Icons.light_mode))
             ],
           ),
           body: Visibility(
@@ -72,7 +77,7 @@ class _ProductListState extends State<ProductList> {
                       crossAxisCount: 2,
                       crossAxisSpacing:8,
                       mainAxisSpacing:8,
-                      childAspectRatio:0.48,
+                      childAspectRatio:0.62,
                     ),
                     itemBuilder: (context, index) {
                       final product = controller.filteredList[index];
@@ -81,7 +86,15 @@ class _ProductListState extends State<ProductList> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(4.r),
+                            borderRadius: BorderRadius.circular(8.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3),
+                              ),
+                            ],
                           ),
                           alignment: Alignment.topCenter,
                           child: Padding(
@@ -89,91 +102,61 @@ class _ProductListState extends State<ProductList> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                //==========================image==================================
                                 Container(
-                                  height:90.h,
+                                  height:145.h,
                                   width: double.maxFinite,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
+                                   // borderRadius: BorderRadius.circular(10.r),
                                    // color: Colors.black12,
                                     image: DecorationImage(
                                       image: NetworkImage(product.image??""),
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ),
-                                //===============================ExpansionTile//////////////////////////////
-                                SizedBox(
-                                    child: ExpansionTile(
-                                      title:Text(
-                                        'id:${product.id}',
-                                        style: TextStyle(
-                                          fontSize:13.sp,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Title:${product.title}',
-                                            style: TextStyle(
-                                              fontSize:13.sp,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Price:${product.price}',
-                                            style: TextStyle(
-                                              fontSize:13.sp,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Description:${product.description}',
-                                            style: TextStyle(
-                                              fontSize:13.sp,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Category:${product.category}',
-                                            style: TextStyle(
-                                              fontSize:13.sp,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      //===========================dropdown ==========================
-                                      children: [
-                                        Container(
-                                          height:40.h,
-                                          width: double.maxFinite,
-                                          color: Colors.white70,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              IconButton(onPressed:(){}, icon:Icon(Icons.edit,color:Colors.green,)),
-                                              IconButton(
-                                                onPressed: () {
-                                                },
-                                                icon: Icon(
-                                                  Icons.delete,
-                                                  color: Colors.redAccent,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                SizedBox(height:5.h,),
+                                //================================text==================================
+                                Text(
+                                  'id:${product.id}',
+                                  style: TextStyle(
+                                    fontSize:13.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
                                   ),
+                                ),
+                                Text(
+                                  'Title:${product.title}',
+                                  style: TextStyle(
+                                    fontSize:13.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Price:${product.price}',
+                                  style: TextStyle(
+                                    fontSize:13.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Description:${product.description}',
+                                  style: TextStyle(
+                                    fontSize:13.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Category:${product.category}',
+                                  style: TextStyle(
+                                    fontSize:13.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
